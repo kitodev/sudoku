@@ -1,0 +1,60 @@
+
+    <h1>
+      @switch (mode) {
+        @case ('edit') {
+          Edit initial state
+        }
+        @case ('waiting') {
+          Predefine sodoku or start sodoku
+        }
+        @case ('game-over') {
+          Predefine sodoku or start sodoku
+        }
+        @default {
+          Fill all Sodoku cells to check result
+        }
+      }
+    </h1>
+
+    <div class="grid">
+      @for (cell of grid; track cell.id) {
+        <app-cell (click)="cellClicked(cell)" [cell]="cell" />
+      }
+    </div>
+
+    @if(!!errorNumber) {
+      <div>
+        <p>
+          An error was found in the game,
+          the number {{errorNumber}} repited multiple times in the same {{where}}
+        </p>
+      </div>
+    }
+
+    <div class="actions">
+      @switch (mode) {
+        @case ('edit') {
+          <button (click)="mode = 'waiting'">
+            Lock Predefined Mode
+          </button>
+        }
+        @case ('waiting') {
+          <button  (click)="mode = 'edit'">
+            Predefine Soduko
+          </button>
+          <button (click)="start()">
+            Start Sodoku
+          </button>
+        }
+        @case ('game-over') {
+          <button class="success" (click)="renewGame()">
+            Perfect! Restart the board
+          </button>
+        }
+        @default {
+          <button (click)="checkResult()" [class.disabled]="noEmptySodokuCells">
+            Check result
+          </button>
+        }
+      }
+    </div>

@@ -1,0 +1,34 @@
+
+
+.grid {
+  display: inline-grid;
+  margin: 40px auto;
+  grid-template-columns: repeat(9, 50px);
+  grid-auto-rows: minmax(50px, auto);
+  border: 2px solid #000;
+}
+
+p {
+  margin-bottom: 20px;
+  color: #f13726;
+}
+
+app-cell {
+  &:nth-of-type(3n) {
+    border-right: 2px solid #000;
+  }
+  &:nth-of-type(9n) {
+    border-right: 0 solid #000;
+  }
+  &:nth-of-type(n+19):nth-of-type(-n+27),
+  &:nth-of-type(n+46):nth-of-type(-n+54) {
+    border-bottom: 2px solid #000;
+  }
+}
+
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
